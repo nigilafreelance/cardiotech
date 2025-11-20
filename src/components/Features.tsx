@@ -39,29 +39,12 @@ const features = [
 ];
 
 const Features = () => {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.from(".feature-card", {
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.1,
-        ease: "power2.out"
-      });
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <section ref={sectionRef} className="py-20 bg-slate-50 dark:bg-slate-800/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-4">
             Why Choose <span className="text-primary">CardioTech</span>?
@@ -73,19 +56,25 @@ const Features = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card glass-card p-8 rounded-2xl group hover:-translate-y-2 transition-transform duration-300">
+            <div
+              key={index}
+              className="feature-card glass-card p-8 rounded-2xl group hover:-translate-y-2 transition-transform duration-300"
+            >
               <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <feature.icon size={28} className="text-primary group-hover:text-white transition-colors" />
               </div>
+
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">
                 {feature.title}
               </h3>
+
               <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                 {feature.description}
               </p>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
